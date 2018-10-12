@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel logowania</title>
+</head>
+<body>
+
+<form method="post">
+    email:   <input type="email" name="email">
+    hasło: <input type="password" name="password">
+    <input type="submit" name="action" value="Zaloguj">
+    {%  if 'logged_in' in session: %}
+        <input type="submit" name="action" value="Wyloguj">
+    {% endif %}
+</form>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+</body>
+</html>

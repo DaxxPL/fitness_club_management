@@ -5,7 +5,6 @@ from sqlalchemy.types import Integer, Boolean, String
 
 
 class User(db.Model, UserMixin):
-    __tablename__ = 'Users'
     id = Column(Integer, autoincrement=True, primary_key=True)
     active = Column(Boolean, default=True)
     name = Column(String(20), nullable=False)
