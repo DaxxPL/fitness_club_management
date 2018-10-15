@@ -9,7 +9,7 @@ from functools import wraps
 def login_required(func):
     @wraps(func)
     def wrap(*args, **kwargs):
-        if not 'logged_in' in session:
+        if 'logged_in'not in session:
             flash('Musisz być zalogowany.')
             return redirect('/')
         else:
@@ -43,9 +43,11 @@ def login():
                 flash('Nie można wylogować niezalogowaneo użytkownika.')
     return render_template('login.html')
 
+
 @app.route('/czy_logowanie_dziala')
 @login_required
 def check():
     return render_template('zalogowano.html')
+
 
 app.secret_key = 'sekretny klucz'
