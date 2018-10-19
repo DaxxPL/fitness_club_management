@@ -1,9 +1,10 @@
-from main import app
-from main import db
-from flask import request, session, flash, render_template, redirect
+from models import db
+from flask import request, session, flash, render_template, redirect, Blueprint
 from models import User
 from passlib.hash import sha256_crypt
 from functools import wraps
+
+login_blueprint = Blueprint('logins', __name__)
 
 
 def login_required(func):
@@ -17,23 +18,28 @@ def login_required(func):
     return wrap
 
 
-@app.route('/', methods=['GET', 'POST'])
+@login_blueprint.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         if request.form['action'] == 'Zaloguj':
-            db_user = User.query.filter_by(email=request.form['email']).first()
-            if db_user:
-                db_password = db_user.password
-                if sha256_crypt.verify(request.form['password'], db_password):
-                    session['logged_in'] = True
-                    session['username'] = request.form['email']
-                    db_user.active = 1
-                    db.session.commit()
-                    flash('Zalogowano!')
+            from_email_form = request.form['email']
+            from_pass_form = request.form['password']
+            if len(from_email_form) != 0 and len(from_pass_form) != 0:
+                db_user = User.query.filter_by(email=from_email_form).first()
+                if db_user:
+                    db_password = db_user.password
+                    if sha256_crypt.verify(from_pass_form, db_password):
+                        session['logged_in'] = True
+                        session['username'] = request.form['email']
+                        db_user.active = 1
+                        db.session.commit()
+                        flash('Zalogowano!')
+                    else:
+                        flash('Niepoprawne hasło')
                 else:
-                    flash('Niepoprawne hasło')
+                    flash('Użytkownika o podanym adresie e-mail nie ma w bazie!')
             else:
-                flash('Użytkownika o podanym adresie e-mail nie ma w bazie!')
+                flash('nie wprowadziłeś hasła!')
         elif request.form['action'] == 'Wyloguj':
             try:
                 User.query.filter_by(email=session['username']).first().active=0
@@ -44,10 +50,9 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/czy_logowanie_dziala')
+@login_blueprint.route('/czy_logowanie_dziala')
 @login_required
 def check():
     return render_template('zalogowano.html')
 
 
-app.secret_key = 'sekretny klucz'
