@@ -1,6 +1,5 @@
-from models import db
+from fitness_club_manager.models import db, User
 from flask import request, session, flash, render_template, redirect, Blueprint
-from models import User
 from passlib.hash import sha256_crypt
 from functools import wraps
 

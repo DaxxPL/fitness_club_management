@@ -1,0 +1,1 @@
+import fitness_club_manager.config
