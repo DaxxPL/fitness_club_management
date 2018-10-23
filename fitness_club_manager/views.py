@@ -49,6 +49,8 @@ def login():
     return render_template('login.html')
 
 
+
+
 @login_blueprint.route('/czy_logowanie_dziala')
 @login_required
 def check():
