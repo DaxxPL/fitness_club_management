@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Grid.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style-plany.css') }}">
+
+        <title>
+            Athlete dashboard
+        </title>
+    </head>
+    <body> 
+        <div class="row">
+            <div class="col menu">
+                <img src="{{ url_for('static', filename='login.png') }}">
+                <div class="hello">
+                    <span class="text">
+                        Witaj, {{ name }}
+                    </span> 
+                    <span class="icon">
+                        <form method="post">
+                            <button name="button" value="log_out">
+                                <ion-icon name="power"></ion-icon>
+                            </button>
+                        </form>
+                    </span>
+                </div>
+                
+                <div class="menu_item">
+                    <form action=" {{url_for('logins.forward')}}" method="get">
+                        <button>
+                            <ion-icon name="fitness"></ion-icon>
+                            <p>Strona głowna</p>
+                        </button>
+                    </form>
+
+                </div>
+                <div class="menu_item">
+                    <button type="button">
+                        <ion-icon name="person"></ion-icon>
+                        <p>Moj profil</p>
+                    </button>
+                </div>
+                
+                <div class="menu_item">
+                    <button type="button">
+                        <ion-icon name="clipboard"></ion-icon>
+                        <p>Karnet</p>
+                    </button>
+                </div>
+                
+                <div class="menu_item">
+                    <button type="button">
+                        <ion-icon name="podium"></ion-icon></ion-icon>
+                        <p>Moje treningi</p>
+                    </button>
+                </div>
+                
+                
+            </div>
+            
+            <div class="col span-3-of-4 header">
+            <table>
+                <tr>
+                    <td>
+                        <form method="post">
+                            <button name="button" value="back">
+                                <ion-icon name="arrow-dropleft"></ion-icon>
+                            </button>
+                        </form>
+
+                    </td>
+                    <td>
+                        {{ day }}
+                        <br>
+                        {{ date.day }}/{{ date.month }}/{{ date.year }}
+                    </td>
+                    <td>
+                        <form method="post">
+                            <button name="button" value="forward">
+                                <ion-icon name="arrow-dropright"></ion-icon>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </table>  
+            </div>
+            
+            <div class="col span-1-of-4">
+                <div class="annoucments">
+                Ble ble ble ble ble ble ble dgdfgdgd dgd gdgsdfgjs djgsfdj gsfjg sjdf fg sfg sfdg sfd gfdg sdg sfdg sfdgijfsdgfds gsdf gsdfg sdfg sdfg isfdg sfdg 
+                    sf gssfg 
+                    sf gsfg sf gfs gsfg sfdg sdgsdgdfsg aaaaaaa
+                
+                </div>
+                
+                <div class="training">
+                    <div class="head">
+                        <h2>ABOCdEEE</h2>
+                        <h3>dfgdfg</h3>
+                    </div>
+                    <div class="rest">
+                        ABOCdEEE
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col span-1-of-2 subscription">
+                <h2>
+                    Zapisz się na zajęcia
+                </h2>
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th>
+                            Rodzaj
+                        </th>
+
+                        <th>
+                            Start
+                        </th>
+
+                        <th>
+                            Koniec
+                        </th>
+
+                        <th>
+                            Limit
+                        </th>
+
+                        <th>
+
+                        </th>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <td>
+                        Trening Dnia
+                        </td>
+                        <td>
+                        8:45
+                        </td>
+                        <td>
+                        9:45
+                        </td>
+                        <td class="counter">
+                            <p>
+                                4/12
+                            <p> 
+                            <span class="icon">
+                                <ion-icon name="man"></ion-icon>
+                            </span>
+                        </td>
+                        <td  class="icons">
+                            <button type="button" class="reg">
+                                <ion-icon name="checkmark-circle"></ion-icon>
+                            </button>
+                        </td>
+                    </tr>
+                
+                    
+                    <tr>
+                        <td>
+                        Trening Dnia
+                        </td>
+                        <td>
+                        8:45
+                        </td>
+                        <td>
+                        9:45
+                        </td>
+                        <td class="counter">
+                            <p>
+                                4/12
+                            <p> 
+                            <span class="icon">
+                                <ion-icon name="man"></ion-icon>
+                            </span>
+                        </td>
+                        <td  class="icons">
+                            <button type="button" class="reg">
+                                <ion-icon name="close-circle"></ion-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                        Trening Dnia
+                        </td>
+                        <td>
+                        8:45
+                        </td>
+                        <td>
+                        9:45
+                        </td>
+                        <td class="counter">
+                            <p>
+                                4/12
+                            <p> 
+                            <span class="icon">
+                                <ion-icon name="man"></ion-icon>
+                            </span>
+                        </td>
+                        <td class="icons">
+                            <div class="inact">
+                                <ion-icon name="checkmark"></ion-icon>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                        Trening Dnia
+                        </td>
+                        <td>
+                        8:45
+                        </td>
+                        <td>
+                        9:45
+                        </td>
+                        <td class="counter">
+                            <p>
+                                4/12
+                            <p> 
+                            <span class="icon">
+                                <ion-icon name="man"></ion-icon>
+                            </span>
+                        </td>
+                        <td class="icons">
+                            <div class="inact">
+                                <ion-icon name="close"></ion-icon>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        
+        </div>
+
+        
+        <script src="https://unpkg.com/ionicons@4.4.7/dist/ionicons.js"></script>
+    </body>   
+    </html>

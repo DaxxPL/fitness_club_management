@@ -1,0 +1,220 @@
+body {
+    background-color: #f4f1f1;
+    font-size: 20px;
+    color: #000000;
+    font-family: 'Roboto';
+}
+
+
+.header {
+    font-weight: 200;
+    font-size: 90%;
+    color: #676767;
+    margin-top: 0px;
+}
+
+.header table{
+    margin-left: auto;
+    margin-right: auto;
+}
+.header table td{
+    text-align: center;
+    text-transform: uppercase;
+    
+}
+
+.header button{
+    border: none;
+    background-color: #f4f1f1;
+    border-radius: 50%;
+    
+}
+
+.header ion-icon {
+    margin: 10px 0px;
+    background-color: #e67e22;
+    border-radius: 50%;
+    font-size: 190%;
+    color: white;
+    padding: 5px;
+    margin: 5px 0px;
+    box-shadow: 1px 1px 2px #000000;
+    transition: background-color 0.2s;
+}
+
+.header ion-icon:hover {
+    background-color: #774314;
+}
+
+
+.menu {
+    position: static;
+    background-color: white;
+    height: 100vh;
+    text-align: center;
+    margin-top: 0px;
+    width: 250px;
+    
+}
+
+.menu button {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    height: auto;
+    width: auto;
+    background-color: #eae8e8;
+}
+
+.hello {
+    font-weight: 300;
+    font-size: 60%;
+    background-color: #eae8e8;
+    padding: 5px 10px;
+    height: 25px;
+    border-bottom: 1px solid #b4b4b4;
+}
+
+.menu .icon {
+    float: right;
+}
+
+.menu .text {
+    margin-top: 8px;
+    float: left;
+}
+
+
+.menu .hello ion-icon {
+    font-size: 200%;
+}
+
+.menu_item button{
+    background-color: white;
+    display: flex;
+    font-size: 60%;
+    font-weight: 300;
+    color: black;
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.2s
+}
+
+.menu_item button:hover {
+    background-color: #b7b7b7;
+}
+
+.menu_item button:active {
+    background-color: #eae8e8
+}
+
+.menu_item button ion-icon {
+    color: #676767;
+    margin: 10px 20px;
+    font-size: 150%;
+}
+
+.menu_item button p {
+    display: block;
+}
+
+
+.annoucments {
+    font-size: 60%;
+    background-color: #F4B350;
+    box-shadow: 1px 1px 1px;
+    margin: 10px 5px;
+    
+}
+
+.training {
+    box-shadow: 1px 1px 1px;
+    margin: 10px 5px;
+}
+
+.training .head {
+    font-size: 60%;
+    background-color: white;
+}
+
+.training .rest {
+    font-size: 60%;
+    background-color: #eaeaea;  
+}
+
+
+.subscription {
+    font-size: 60%;
+    background-color: #ffffff;
+    box-shadow: 1px 1px 1px;
+}
+
+.subscription h2 {
+    padding: 10px;
+}
+
+.subscription table {
+    text-align: left;
+    width: 100%;
+    padding: 10px 0px;
+    
+    
+}
+
+.subscription .icon ion-icon{
+    color: #676767;
+    font-size: 150%;
+}
+
+.subscription table th {
+    font-weight: bold;
+    padding: 20px;
+}
+
+.subscription table td {
+    font-weight: 300;
+    margin: auto;
+    padding: 10px;
+
+}
+
+.subscription table .counter {
+    display: flex;
+}
+
+.subscription table .counter p {
+    display: flex;
+    line-height: 19px;
+}
+
+
+.subscription table tr:nth-child(even){
+    background-color: #eaeaea;
+    border-collapse: collapse;
+}
+
+.subscription  table .reg {
+    font-size: 180%;
+    background-color: #e67e22;
+    border: none;
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    line-height: 10%;
+    color: white;
+    box-shadow: 1px 1px 1px #000000;
+    transition: background-color 0.2s;
+}
+
+.subscription  table .reg:hover {
+    background-color: #b7b7b7;
+}
+
+.subscription  table .inact {
+    font-size: 180%;
+
+}
+
+.subscription table .icons  {
+    text-align: center;
+}

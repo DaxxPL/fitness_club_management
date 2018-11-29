@@ -1,19 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Panel logowania</title>
-</head>
-<body>
+<html lang="pl">
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+            <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+            <title>
+                Husar Cross Gym - Panel Logowania
+            </title>
+    </head>
 
-<form method="post">
-    email:   <input type="email" name="email">
-    hasło: <input type="password" name="password">
-    <input type="submit" name="action" value="Zaloguj">
-    {%  if 'logged_in' in session: %}
-        <input type="submit" name="action" value="Wyloguj">
-    {% endif %}
-</form>
+    <body>
+    <header>
+        zaloguj
+    </header>
+
+    <div class="row" id='login-panel'>
+                <img src="{{ url_for('static', filename='login.png') }}" alt="Husar Logo" class="logo">
+                <form id="login-panel" method="post">
+                    <input name="email" type="email" placeholder="Adres email" required>
+                    <input name="password" type="password" placeholder="Hasło" required>
+                    <button name="login" value="click">Zaloguj</button>
+
+                </form>
+                <button name="forgot">Zapomniałem hasła</button>
+        </div>
+
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     <ul class=flashes>

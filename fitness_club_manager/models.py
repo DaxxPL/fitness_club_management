@@ -1,6 +1,6 @@
 from flask_login import UserMixin
 from sqlalchemy import Table, Column, ForeignKey
-from sqlalchemy.types import Integer, Boolean, String, DateTime
+from sqlalchemy.types import Integer, Boolean, String, Date, Time
 from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
 
@@ -29,5 +29,8 @@ class Training(db.Model):
     __tablename__ = 'training'
     training_id = Column(Integer, autoincrement=True, primary_key=True)
     max_participants = Column(Integer, nullable=False)
-    time_of_training = Column(DateTime, nullable=False)
+    time_of_training = Column(Time, nullable=False)
+    date_of_training = Column(Date, nullable=False)
+    subscribers = Column(Integer, default=0)
+    description = Column(String, nullable=False)
 
