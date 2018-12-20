@@ -16,7 +16,7 @@
                 <img src="{{ url_for('static', filename='login.png') }}">
                 <div class="hello">
                     <span class="text">
-                        Witaj, {{ name }}
+                        Witaj, {{ user.name }}
                     </span> 
                     <span class="icon">
                         <form method="post">
@@ -112,128 +112,58 @@
                 </h2>
                 <table cellspacing="0" cellpadding="0">
                     <tr>
-                        <th>
-                            Rodzaj
-                        </th>
-
-                        <th>
-                            Start
-                        </th>
-
-                        <th>
-                            Koniec
-                        </th>
-
-                        <th>
-                            Limit
-                        </th>
-
-                        <th>
-
-                        </th>
+                        <th>Rodzaj</th> <th>Start</th><th>Koniec</th><th>Limit</th><th></th>
                     </tr>
-                    
-                    
-                    <tr>
-                        <td>
-                        Trening Dnia
-                        </td>
-                        <td>
-                        8:45
-                        </td>
-                        <td>
-                        9:45
-                        </td>
-                        <td class="counter">
-                            <p>
-                                4/12
-                            <p> 
-                            <span class="icon">
-                                <ion-icon name="man"></ion-icon>
-                            </span>
-                        </td>
-                        <td  class="icons">
-                            <button type="button" class="reg">
-                                <ion-icon name="checkmark-circle"></ion-icon>
-                            </button>
-                        </td>
-                    </tr>
-                
-                    
-                    <tr>
-                        <td>
-                        Trening Dnia
-                        </td>
-                        <td>
-                        8:45
-                        </td>
-                        <td>
-                        9:45
-                        </td>
-                        <td class="counter">
-                            <p>
-                                4/12
-                            <p> 
-                            <span class="icon">
-                                <ion-icon name="man"></ion-icon>
-                            </span>
-                        </td>
-                        <td  class="icons">
-                            <button type="button" class="reg">
-                                <ion-icon name="close-circle"></ion-icon>
-                            </button>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                        Trening Dnia
-                        </td>
-                        <td>
-                        8:45
-                        </td>
-                        <td>
-                        9:45
-                        </td>
-                        <td class="counter">
-                            <p>
-                                4/12
-                            <p> 
-                            <span class="icon">
-                                <ion-icon name="man"></ion-icon>
-                            </span>
-                        </td>
-                        <td class="icons">
-                            <div class="inact">
-                                <ion-icon name="checkmark"></ion-icon>
-                            </div>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td>
-                        Trening Dnia
-                        </td>
-                        <td>
-                        8:45
-                        </td>
-                        <td>
-                        9:45
-                        </td>
-                        <td class="counter">
-                            <p>
-                                4/12
-                            <p> 
-                            <span class="icon">
-                                <ion-icon name="man"></ion-icon>
-                            </span>
-                        </td>
-                        <td class="icons">
-                            <div class="inact">
-                                <ion-icon name="close"></ion-icon>
-                            </div>
-                        </td>
-                    </tr>
+                    {% for training in trainings %}
+                        <tr>
+                            <td>{{ training.name_of_training }}</td>
+                            <td>{{ training.start_time_of_training.isoformat(timespec='minutes') }}</td>
+                            <td>{{ training.finish_time_of_training.isoformat(timespec='minutes') }}</td>
+                            <td>
+                                {{ training.number_of_signed_users() }}/{{ training.max_participants }}
+                                <span class="icon">
+                                    <ion-icon name="man"></ion-icon>
+                                </span>
+                            </td>
+                            <td class="icons">
+                                {% if user.can_subscribe() %}
+                                    {% if training.datetime_of_training() < now %}
+                                        <div class="inact">
+                                            <ion-icon name="close"></ion-icon>
+                                        </div>
+                                    {% else %}
+                                        {% if training in user.trainings %}
+                                            <form method="post">
+                                                <button type="submit" name="sign_out" value="{{ training.id }}" class="reg">
+                                                    <ion-icon name="close-circle"></ion-icon>
+                                                </button>
+                                            </form>
+
+                                        {% else %}
+                                            {% if training.number_of_signed_users() >= training.max_participants %}
+                                                <div class="inact">
+                                                    <ion-icon name="close"></ion-icon>
+                                                </div>
+                                            {% else %}
+                                                <form method="post">
+                                                    <button class="reg" name="sign_in" value="{{ training.id }}">
+                                                        <ion-icon name="checkmark-circle"></ion-icon>
+                                                    </button>
+                                                </form>
+
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endif %}
+                                {% else %}
+                                    <div class="inact">
+                                        <ion-icon name="close"></ion-icon>
+                                    </div>
+                                {% endif %}
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+
                 </table>
             </div>
         

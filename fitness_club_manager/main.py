@@ -13,6 +13,7 @@ db.create_all(app=app)
 
 app.register_blueprint(login_blueprint)
 app.register_blueprint(user_training)
+app.debug = True
 
 if __name__ == '__main__':
     app.run()

@@ -48,12 +48,12 @@ def login():
 def check():
     return render_template('zalogowano.html')
 
+
 @login_blueprint.route('/trening')
 @login_required
 def forward():
     date = datetime.date.today()
     return redirect(url_for('logins.trainings', date=date))
-
 
 
 @login_blueprint.route('/trening/<date>', methods=['GET', 'POST'])
@@ -62,19 +62,36 @@ def trainings(date):
     date_object = datetime.date.fromisoformat(date)
     day_of_week = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela']
     user = User.query.filter_by(email=session['username']).first()
+    this_day_trainings = Training.query.filter_by(date_of_training=date_object).all()
     if request.method == 'POST':
-        if request.form['button'] == 'log_out':
-            try:
-                User.query.filter_by(email=session['username']).first().active = 0
-                db.session.commit()
-                session.clear()
-                return redirect('/')
-            except KeyError:
-                flash('Nie można wylogować niezalogowaneo użytkownika.')
-        if request.form['button'] == 'back':
-            return redirect(url_for('logins.trainings', date=date_object + datetime.timedelta(days=-1)))
-        elif request.form['button'] == 'forward':
-            return redirect(url_for('logins.trainings', date=date_object + datetime.timedelta(days=+1)))
-    return render_template('plany.html', date=date_object, day=day_of_week[date_object.weekday()-1], name=user.name)
+        if 'button' in request.form.keys():
+            if request.form['button'] == 'log_out':
+                try:
+                    user.active = 0
+                    db.session.commit()
+                    session.clear()
+                    return redirect('/')
+                except KeyError:
+                    flash('Nie można wylogować niezalogowaneo użytkownika.')
+            elif request.form['button'] == 'back':
+                return redirect(url_for('logins.trainings', date=date_object + datetime.timedelta(days=-1)))
+            elif request.form['button'] == 'forward':
+                return redirect(url_for('logins.trainings', date=date_object + datetime.timedelta(days=+1)))
+        elif 'sign_in' in request.form.keys():
+            training = Training.query.filter_by(id=int(request.form['sign_in'])).first()
+            user.trainings.append(training)
+            db.create_all()
+            db.session.commit()
+        elif 'sign_out' in request.form.keys():
+            training = Training.query.filter_by(id=int(request.form['sign_out'])).first()
+            user.trainings.remove(training)
+            db.create_all()
+            db.session.commit()
+    return render_template('plany.html',
+                           date=date_object,
+                           day=day_of_week[date_object.weekday()-1],
+                           user=user,
+                           trainings=this_day_trainings,
+                           now=datetime.datetime.now() - datetime.timedelta(minutes=15))
 
 
