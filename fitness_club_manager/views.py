@@ -62,7 +62,12 @@ def trainings(date):
     date_object = datetime.date.fromisoformat(date)
     day_of_week = ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela']
     user = User.query.filter_by(email=session['username']).first()
-    this_day_trainings = Training.query.filter_by(date_of_training=date_object).all()
+    this_day_trainings = Training.query.filter_by(date_of_training=date_object)\
+        .order_by(Training.start_time_of_training).all()
+    dis_training = None
+    print(user.trainings_left)
+    if len(this_day_trainings) > 0:
+        dis_training = this_day_trainings[0]
     if request.method == 'POST':
         if 'button' in request.form.keys():
             if request.form['button'] == 'log_out':
@@ -80,18 +85,26 @@ def trainings(date):
         elif 'sign_in' in request.form.keys():
             training = Training.query.filter_by(id=int(request.form['sign_in'])).first()
             user.trainings.append(training)
+            dis_training = training
+            if user.trainings_left >= 1:
+                user.trainings_left -= 1
             db.create_all()
             db.session.commit()
         elif 'sign_out' in request.form.keys():
             training = Training.query.filter_by(id=int(request.form['sign_out'])).first()
             user.trainings.remove(training)
+            if user.trainings_left >= 0:
+                user.trainings_left += 1
             db.create_all()
             db.session.commit()
+        elif 'display_training' in request.form.keys():
+            dis_training = Training.query.filter_by(id=int(request.form['display_training'])).first()
     return render_template('plany.html',
                            date=date_object,
-                           day=day_of_week[date_object.weekday()-1],
+                           day=day_of_week[date_object.weekday()],
                            user=user,
                            trainings=this_day_trainings,
-                           now=datetime.datetime.now() - datetime.timedelta(minutes=15))
+                           now=datetime.datetime.now() - datetime.timedelta(minutes=15),
+                           dis_training=dis_training)
 
 

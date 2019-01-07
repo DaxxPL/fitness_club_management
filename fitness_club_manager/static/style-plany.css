@@ -218,3 +218,9 @@ body {
 .subscription table .icons  {
     text-align: center;
 }
+
+.subscription button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

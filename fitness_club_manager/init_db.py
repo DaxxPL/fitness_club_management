@@ -16,6 +16,7 @@ if __name__ == '__main__':
 
     user3 = User('Hubert', 'hh@o2.pl', 'haslo3')
     user3.valid_up_to = datetime.date.today() + datetime.timedelta(days=9)
+    user3.trainings_left = 1
 
     training1 = Training(25,
                          datetime.time(20, 45),

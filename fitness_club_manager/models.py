@@ -39,6 +39,12 @@ class User(db.Model, UserMixin):
         else:
             return False
 
+    def can_unsubscribe(self, training):
+        if self in training.users:
+            return True
+        else:
+            return False
+
 
 class Training(db.Model):
     __tablename__ = 'training'
